@@ -133,18 +133,16 @@ function App() {
             <div className="app__information">
               <h3>Live Cases by Country</h3>
               <Table countries={tableData} />
-              <Sticky stickyStyle={{ top: 50 }}>
-                <h3 style={{ paddingTop: 20 }}>
-                  Past 30 days {casesType} (
-                  {countryName.charAt(0).toUpperCase() + countryName.slice(1)})
-                </h3>
-                <LineGraph casesType={casesType} country={country} />
-                <h3 style={{ paddingTop: 20 }}>
-                  Totals (
-                  {countryName.charAt(0).toUpperCase() + countryName.slice(1)})
-                </h3>
-                <BarGraph countryInfo={countryInfo} />
-              </Sticky>
+              <h3 style={{ paddingTop: 20 }}>
+                Past 30 days {casesType} (
+                {countryName.charAt(0).toUpperCase() + countryName.slice(1)})
+              </h3>
+              <LineGraph casesType={casesType} country={country} />
+              <h3 style={{ paddingTop: 20 }}>
+                Totals (
+                {countryName.charAt(0).toUpperCase() + countryName.slice(1)})
+              </h3>
+              <BarGraph countryInfo={countryInfo} />
             </div>
           </CardContent>
         </Card>

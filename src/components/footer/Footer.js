@@ -16,32 +16,7 @@ function Footer() {
     <Grid className="footer-bottom-container" container justify="center">
       <Grid style={{ textAlign: "center" }} item md={2} sm={2} xs={12}></Grid>
       <Grid style={{ textAlign: "center" }} item md={8} sm={8} xs={12}>
-        <Typography
-          style={{ color: "#999999" }}
-          className="footer-item"
-          variant="caption"
-          gutterBottom
-        >
-          &copy; {1900 + new Date().getYear()} COVID-19 Tracker , made with{" "}
-          <Favorite
-            style={{ width: 18, height: 14, position: "relative", top: 3 }}
-          />{" "}
-          by{" "}
-          <a
-            style={{ color: "#ffffff", textDecoration: "none" }}
-            href="https://findhandry.web.app"
-          >
-            Handry
-          </a>
-          {" | "}
-          <EmailIcon
-            style={{ width: 18, height: 14, position: "relative", top: 3 }}
-          />{" "}
-          handrykanda@gmail.com
-          <PhoneIcon
-            style={{ width: 18, height: 14, position: "relative", top: 3 }}
-          />
-          +263 77 629 8599
+        <Typography>
           <Tooltip title="Follow me on facebook" placement="left">
             <Button
               href="https://www.facebook.com/handry.kandah"
@@ -95,6 +70,33 @@ function Footer() {
               <i className={" fab fa-linkedin"} />
             </Button>
           </Tooltip>
+        </Typography>
+        <Typography
+          style={{ color: "#999999" }}
+          className="footer-item"
+          variant="caption"
+          gutterBottom
+        >
+          &copy; {1900 + new Date().getYear()} COVID-19 Tracker , made with{" "}
+          <Favorite
+            style={{ width: 18, height: 14, position: "relative", top: 3 }}
+          />{" "}
+          by{" "}
+          <a
+            style={{ color: "#ffffff", textDecoration: "none" }}
+            href="https://findhandry.web.app"
+          >
+            Handry
+          </a>
+          {" | "}
+          <EmailIcon
+            style={{ width: 18, height: 14, position: "relative", top: 3 }}
+          />{" "}
+          handrykanda@gmail.com
+          <PhoneIcon
+            style={{ width: 18, height: 14, position: "relative", top: 3 }}
+          />
+          +263 77 629 8599
         </Typography>
       </Grid>
       <Grid style={{ textAlign: "center" }} item md={2} sm={2} xs={12}></Grid>
