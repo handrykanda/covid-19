@@ -58,6 +58,8 @@ function App() {
       countryCode === "worldwide"
         ? "https://disease.sh/v3/covid-19/all"
         : `https://disease.sh/v3/covid-19/countries/${countryCode}`;
+    console.log("code: ", countryCode);
+    console.log("url: ", url);
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
@@ -66,6 +68,12 @@ function App() {
         if (countryCode !== "worldwide") {
           setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
           setMapZoom(4);
+        } else {
+          setMapCenter({
+            lat: 19.4194806,
+            lng: 21.3089653,
+          });
+          setMapZoom(2);
         }
       });
   };
