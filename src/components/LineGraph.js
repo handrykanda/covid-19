@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Line } from "react-chartjs-2";
 import numeral from "numeral";
+import { casesTypeColors } from "../util";
 
 const options = {
   legend: {
@@ -63,41 +64,49 @@ const buildChartData = (data, casesType) => {
   return chartData;
 };
 
-function LineGraph({ casesType }) {
+function LineGraph({ casesType, country }) {
   const [data, setData] = useState([]);
 
   useEffect(() => {
     const fetchData = () => {
-      fetch("https://disease.sh/v3/covid-19/historical/all?lastdays=120")
+      const url =
+        country === "worldwide"
+          ? "https://disease.sh/v3/covid-19/historical/all?lastdays=30"
+          : `https://disease.sh/v3/covid-19/historical/${country}?lastdays=30`;
+
+      fetch(url)
         .then((response) => {
           return response.json();
         })
         .then((data) => {
-          let chartData = buildChartData(data, casesType);
+          let chartData =
+            country === "worldwide"
+              ? buildChartData(data, casesType)
+              : buildChartData(data.timeline, casesType);
           setData(chartData);
-          console.log(chartData);
-          // buildChart(chartData);
         });
     };
 
     fetchData();
-  }, [casesType]);
+  }, [casesType, country]);
 
   return (
     <div>
-      {data?.length > 0 && (
+      {data?.length > 0 ? (
         <Line
           data={{
             datasets: [
               {
-                backgroundColor: "rgba(204, 16, 52, 0.5)",
-                borderColor: "#CC1034",
+                backgroundColor: casesTypeColors[casesType].half_op,
+                borderColor: casesTypeColors[casesType].hex,
                 data: data,
               },
             ],
           }}
           options={options}
         />
+      ) : (
+        <h2 style={{ color: "red" }}>No data available</h2>
       )}
     </div>
   );

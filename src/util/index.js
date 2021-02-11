@@ -2,24 +2,24 @@ import React from "react";
 import numeral from "numeral";
 import { Circle, Popup } from "react-leaflet";
 
-const casesTypeColors = {
+export const casesTypeColors = {
   cases: {
     hex: "#EBBA2E",
     rgb: "rgb(235, 186, 46)",
     half_op: "rgba(235, 186, 46, 0.5)",
-    multiplier: 800,
+    multiplier: 300,
   },
   recovered: {
     hex: "#28a745",
     rgb: "rgb(40,167,69)",
     half_op: "rgba(40,167,69, 0.5)",
-    multiplier: 1200,
+    multiplier: 300,
   },
   deaths: {
     hex: "#fb4443",
     rgb: "rgb(251, 68, 67)",
     half_op: "rgba(251, 68, 67, 0.5)",
-    multiplier: 2000,
+    multiplier: 800,
   },
 };
 
@@ -49,6 +49,11 @@ export const showDataOnMap = (data, casesType) =>
       pathOptions={{
         color: casesTypeColors[casesType].hex,
         fillColor: casesTypeColors[casesType].hex,
+      }}
+      eventHandlers={{
+        click: () => {
+          console.log("markcircleer clicked");
+        },
       }}
     >
       <Popup>

@@ -13,6 +13,7 @@ import Table from "./components/table/Table";
 
 function App() {
   const [country, setInputCountry] = useState("worldwide");
+  const [countryName, setCountryName] = useState("worldwide");
   const [countryInfo, setCountryInfo] = useState({});
   const [countries, setCountries] = useState([]);
   const [mapCountries, setMapCountries] = useState([]);
@@ -66,9 +67,11 @@ function App() {
         setInputCountry(countryCode);
         setCountryInfo(data);
         if (countryCode !== "worldwide") {
+          setCountryName(data.country);
           setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
-          setMapZoom(4);
+          setMapZoom(3);
         } else {
+          setCountryName("worldwide");
           setMapCenter({
             lat: 19.4194806,
             lng: 21.3089653,
@@ -88,7 +91,7 @@ function App() {
         <div className="app__stats">
           <InfoBox
             onClick={(e) => setCasesType("cases")}
-            title="Coronavirus Cases"
+            title="New Cases"
             isYellow
             active={casesType === "cases"}
             cases={prettyPrintStat(countryInfo.todayCases)}
@@ -123,8 +126,11 @@ function App() {
           <div className="app__information">
             <h3>Live Cases by Country</h3>
             <Table countries={tableData} />
-            <h3>Worldwide new {casesType}</h3>
-            <LineGraph casesType={casesType} />
+            <h3>
+              Past 30 days {casesType} (
+              {countryName.charAt(0).toUpperCase() + countryName.slice(1)})
+            </h3>
+            <LineGraph casesType={casesType} country={country} />
           </div>
         </CardContent>
       </Card>
