@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import numeral from "numeral";
+import Sticky from "react-sticky-el";
 import { sortData, prettyPrintStat } from "./util";
 import { Card, CardContent } from "@material-ui/core";
 import "leaflet/dist/leaflet.css";
@@ -89,32 +90,35 @@ function App() {
           countries={countries}
           onCountryChange={onCountryChange}
         />
-        <div className="app__stats">
-          <InfoBox
-            onClick={(e) => setCasesType("cases")}
-            title="New Cases"
-            isYellow
-            active={casesType === "cases"}
-            cases={prettyPrintStat(countryInfo.todayCases)}
-            total={numeral(countryInfo.cases).format("0.0a")}
-          />
-          <InfoBox
-            onClick={(e) => setCasesType("recovered")}
-            title="Recovered"
-            isGreen
-            active={casesType === "recovered"}
-            cases={prettyPrintStat(countryInfo.todayRecovered)}
-            total={numeral(countryInfo.recovered).format("0.0a")}
-          />
-          <InfoBox
-            onClick={(e) => setCasesType("deaths")}
-            title="Deaths"
-            isRed
-            active={casesType === "deaths"}
-            cases={prettyPrintStat(countryInfo.todayDeaths)}
-            total={numeral(countryInfo.deaths).format("0.0a")}
-          />
-        </div>
+        <Sticky stickyStyle={{ zIndex: 20000 }}>
+          <div className="app__stats">
+            <InfoBox
+              onClick={(e) => setCasesType("cases")}
+              title="New Cases"
+              isYellow
+              active={casesType === "cases"}
+              cases={prettyPrintStat(countryInfo.todayCases)}
+              total={numeral(countryInfo.cases).format("0.0a")}
+              style={{ zIndex: 9999999999999999999 }}
+            />
+            <InfoBox
+              onClick={(e) => setCasesType("recovered")}
+              title="Recovered"
+              isGreen
+              active={casesType === "recovered"}
+              cases={prettyPrintStat(countryInfo.todayRecovered)}
+              total={numeral(countryInfo.recovered).format("0.0a")}
+            />
+            <InfoBox
+              onClick={(e) => setCasesType("deaths")}
+              title="Deaths"
+              isRed
+              active={casesType === "deaths"}
+              cases={prettyPrintStat(countryInfo.todayDeaths)}
+              total={numeral(countryInfo.deaths).format("0.0a")}
+            />
+          </div>
+        </Sticky>
         <Map
           countries={mapCountries}
           casesType={casesType}
