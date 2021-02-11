@@ -9,6 +9,7 @@ import Header from "./components/header/Header";
 import InfoBox from "./components/infoBox/InfoBox";
 import Map from "./components/map/Map";
 import LineGraph from "./components/LineGraph";
+import BarGraph from "./components/BarGraph";
 import Table from "./components/table/Table";
 
 function App() {
@@ -69,7 +70,7 @@ function App() {
         if (countryCode !== "worldwide") {
           setCountryName(data.country);
           setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
-          setMapZoom(3);
+          setMapZoom(5);
         } else {
           setCountryName("worldwide");
           setMapCenter({
@@ -131,6 +132,11 @@ function App() {
               {countryName.charAt(0).toUpperCase() + countryName.slice(1)})
             </h3>
             <LineGraph casesType={casesType} country={country} />
+            <h3>
+              Basic stats (
+              {countryName.charAt(0).toUpperCase() + countryName.slice(1)})
+            </h3>
+            <BarGraph countryInfo={countryInfo} />
           </div>
         </CardContent>
       </Card>
