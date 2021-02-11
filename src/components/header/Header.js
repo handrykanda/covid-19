@@ -8,12 +8,20 @@ import {
   CardContent,
 } from "@material-ui/core";
 import Sticky from "react-sticky-el";
+import useScreenSize from "use-screen-size";
 
 function Header({ country, countries, onCountryChange }) {
+  const size = useScreenSize();
   return (
     <div className="app__header">
       <h1>COVID-19 Tracker</h1>
-      <Sticky>
+      <Sticky
+        stickyStyle={{
+          zIndex: 999999,
+          right: size.width <= 1000 && "30%",
+          top: 10,
+        }}
+      >
         <FormControl className="app__dropdown">
           <Select
             style={{ height: 35 }}

@@ -90,7 +90,7 @@ function App() {
           countries={countries}
           onCountryChange={onCountryChange}
         />
-        <Sticky stickyStyle={{ zIndex: 20000 }}>
+        <Sticky stickyStyle={{ zIndex: 9999 }}>
           <div className="app__stats">
             <InfoBox
               onClick={(e) => setCasesType("cases")}
@@ -131,16 +131,18 @@ function App() {
           <div className="app__information">
             <h3>Live Cases by Country</h3>
             <Table countries={tableData} />
-            <h3>
-              Past 30 days {casesType} (
-              {countryName.charAt(0).toUpperCase() + countryName.slice(1)})
-            </h3>
-            <LineGraph casesType={casesType} country={country} />
-            <h3>
-              Basic stats (
-              {countryName.charAt(0).toUpperCase() + countryName.slice(1)})
-            </h3>
-            <BarGraph countryInfo={countryInfo} />
+            <Sticky stickyStyle={{ top: 50 }}>
+              <h3>
+                Past 30 days {casesType} (
+                {countryName.charAt(0).toUpperCase() + countryName.slice(1)})
+              </h3>
+              <LineGraph casesType={casesType} country={country} />
+              <h3>
+                Basic stats (
+                {countryName.charAt(0).toUpperCase() + countryName.slice(1)})
+              </h3>
+              <BarGraph countryInfo={countryInfo} />
+            </Sticky>
           </div>
         </CardContent>
       </Card>
