@@ -6,6 +6,7 @@ import {
   Select,
   Card,
   CardContent,
+  Tooltip,
 } from "@material-ui/core";
 import Sticky from "react-sticky-el";
 import useScreenSize from "use-screen-size";
@@ -23,19 +24,21 @@ function Header({ country, countries, onCountryChange }) {
         }}
       >
         <FormControl className="app__dropdown">
-          <Select
-            style={{ height: 35 }}
-            variant="outlined"
-            value={country}
-            onChange={onCountryChange}
-          >
-            <MenuItem value="worldwide">Worldwide</MenuItem>
-            {countries.map((item) => (
-              <MenuItem key={item.value} value={item.value}>
-                {item.name}
-              </MenuItem>
-            ))}
-          </Select>
+          <Tooltip title="Select any country" placement="left">
+            <Select
+              style={{ height: 35 }}
+              variant="outlined"
+              value={country}
+              onChange={onCountryChange}
+            >
+              <MenuItem value="worldwide">Worldwide</MenuItem>
+              {countries.map((item) => (
+                <MenuItem key={item.value} value={item.value}>
+                  {item.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </Tooltip>
         </FormControl>
       </Sticky>
     </div>

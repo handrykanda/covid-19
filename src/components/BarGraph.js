@@ -13,7 +13,7 @@ const options = {
         ticks: {
           beginAtZero: true,
           callback: function (value, index, values) {
-            return numeral(value).format("0,0");
+            return numeral(value).format("0,0a");
           },
         },
       },

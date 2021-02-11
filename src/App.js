@@ -12,6 +12,7 @@ import Map from "./components/map/Map";
 import LineGraph from "./components/LineGraph";
 import BarGraph from "./components/BarGraph";
 import Table from "./components/table/Table";
+import Footer from "components/footer/Footer";
 
 function App() {
   const [country, setInputCountry] = useState("worldwide");
@@ -83,69 +84,72 @@ function App() {
       });
   };
   return (
-    <div className="app">
-      <div className="app__left">
-        <Header
-          country={country}
-          countries={countries}
-          onCountryChange={onCountryChange}
-        />
-        <Sticky stickyStyle={{ zIndex: 9999 }}>
-          <div className="app__stats">
-            <InfoBox
-              onClick={(e) => setCasesType("cases")}
-              title="New Cases"
-              isYellow
-              active={casesType === "cases"}
-              cases={prettyPrintStat(countryInfo.todayCases)}
-              total={numeral(countryInfo.cases).format("0.0a")}
-              style={{ zIndex: 9999999999999999999 }}
-            />
-            <InfoBox
-              onClick={(e) => setCasesType("recovered")}
-              title="Recovered"
-              isGreen
-              active={casesType === "recovered"}
-              cases={prettyPrintStat(countryInfo.todayRecovered)}
-              total={numeral(countryInfo.recovered).format("0.0a")}
-            />
-            <InfoBox
-              onClick={(e) => setCasesType("deaths")}
-              title="Deaths"
-              isRed
-              active={casesType === "deaths"}
-              cases={prettyPrintStat(countryInfo.todayDeaths)}
-              total={numeral(countryInfo.deaths).format("0.0a")}
-            />
-          </div>
-        </Sticky>
-        <Map
-          countries={mapCountries}
-          casesType={casesType}
-          center={mapCenter}
-          zoom={mapZoom}
-        />
+    <div>
+      <div className="app">
+        <div className="app__left">
+          <Header
+            country={country}
+            countries={countries}
+            onCountryChange={onCountryChange}
+          />
+          <Sticky stickyStyle={{ zIndex: 9999 }}>
+            <div className="app__stats">
+              <InfoBox
+                onClick={(e) => setCasesType("cases")}
+                title="New Cases"
+                isYellow
+                active={casesType === "cases"}
+                cases={prettyPrintStat(countryInfo.todayCases)}
+                total={numeral(countryInfo.cases).format("0.0a")}
+                style={{ zIndex: 9999999999999999999 }}
+              />
+              <InfoBox
+                onClick={(e) => setCasesType("recovered")}
+                title="Recovered"
+                isGreen
+                active={casesType === "recovered"}
+                cases={prettyPrintStat(countryInfo.todayRecovered)}
+                total={numeral(countryInfo.recovered).format("0.0a")}
+              />
+              <InfoBox
+                onClick={(e) => setCasesType("deaths")}
+                title="Deaths"
+                isRed
+                active={casesType === "deaths"}
+                cases={prettyPrintStat(countryInfo.todayDeaths)}
+                total={numeral(countryInfo.deaths).format("0.0a")}
+              />
+            </div>
+          </Sticky>
+          <Map
+            countries={mapCountries}
+            casesType={casesType}
+            center={mapCenter}
+            zoom={mapZoom}
+          />
+        </div>
+        <Card className="app__right">
+          <CardContent>
+            <div className="app__information">
+              <h3>Live Cases by Country</h3>
+              <Table countries={tableData} />
+              <Sticky stickyStyle={{ top: 50 }}>
+                <h3 style={{ paddingTop: 20 }}>
+                  Past 30 days {casesType} (
+                  {countryName.charAt(0).toUpperCase() + countryName.slice(1)})
+                </h3>
+                <LineGraph casesType={casesType} country={country} />
+                <h3 style={{ paddingTop: 20 }}>
+                  Totals (
+                  {countryName.charAt(0).toUpperCase() + countryName.slice(1)})
+                </h3>
+                <BarGraph countryInfo={countryInfo} />
+              </Sticky>
+            </div>
+          </CardContent>
+        </Card>
       </div>
-      <Card className="app__right">
-        <CardContent>
-          <div className="app__information">
-            <h3>Live Cases by Country</h3>
-            <Table countries={tableData} />
-            <Sticky stickyStyle={{ top: 50 }}>
-              <h3>
-                Past 30 days {casesType} (
-                {countryName.charAt(0).toUpperCase() + countryName.slice(1)})
-              </h3>
-              <LineGraph casesType={casesType} country={country} />
-              <h3>
-                Basic stats (
-                {countryName.charAt(0).toUpperCase() + countryName.slice(1)})
-              </h3>
-              <BarGraph countryInfo={countryInfo} />
-            </Sticky>
-          </div>
-        </CardContent>
-      </Card>
+      <Footer />
     </div>
   );
 }
